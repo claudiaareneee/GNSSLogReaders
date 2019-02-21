@@ -45,7 +45,7 @@ function GNSS_data = reader(fileName)
 
         elseif (isequal(line(1),'O'))
             %format string and pull data
-            line = textscan(line, '%s,%32f,%f,%f,%f');
+            line = textscan(line, '%s%32f%f%f%f','delimiter', ',');
 
             orientation(orientation_index).time = cell2mat(line(2));
             orientation(orientation_index).roll = cell2mat(line(3));
@@ -54,12 +54,11 @@ function GNSS_data = reader(fileName)
 
             orientation_index = orientation_index + 1;
         elseif (isequal(line(1),'F'))
-            line = textscan(line, '%s,%32f,%s,%f');
-
-            fix(fix_index).time = cell2mat(line(2));
-            fix(fix_index).constellation = cell2mat(line(3));
-            fix(fix_index).svid = cell2mat(line(4));
-
+            line = line(5:end);
+            line = textscan(line, '%32f%s%f','delimiter', ',');
+            fix(fix_index).time = cell2mat(line(1));
+            fix(fix_index).constellation = string(line(2));
+            fix(fix_index).svid = cell2mat(line(3));
 
             fix_index = fix_index + 1;
 

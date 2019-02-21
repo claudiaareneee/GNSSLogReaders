@@ -56,8 +56,8 @@ function data = rinexReader(fileName)
        
         
         line = fgetl(fid);
-        disp(current_time);
-        disp(initial_time);
+        
+        
         if( current_time < initial_time)
             break;
         end
