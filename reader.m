@@ -32,6 +32,31 @@ while (~(feof(fid)))
     if (isempty(line) || length(line) == 0)
         continue;
         
+    % Orientation line
+    elseif (isequal(line(1),'O'))
+        %format string and pull data
+        line = line(13:end);
+        line = textscan(line, '%32f%f%f%f','delimiter', ',');
+        
+        orientation(orientation_index).time = cell2mat(line(1));
+        orientation(orientation_index).azimuth = cell2mat(line(2));
+        orientation(orientation_index).pitch = cell2mat(line(3));
+        orientation(orientation_index).roll = cell2mat(line(4));
+        
+        orientation_index = orientation_index + 1;
+        
+    % Fix location line
+    elseif (isequal(line(1),'F'))
+        %format string and pull data
+        line = line(5:end);
+        line = textscan(line, '%32f%s%f','delimiter', ',');
+        
+        fix(fix_index).time = cell2mat(line(1));
+        fix(fix_index).constellation = string(line(2));
+        fix(fix_index).svid = cell2mat(line(3));
+        
+        fix_index = fix_index + 1;
+    
     % Status line
     elseif (isequal(line(1),'S'))
         %format string and pull data
@@ -47,31 +72,6 @@ while (~(feof(fid)))
         
         status_index = status_index + 1;
         
-    % Orientation line
-    elseif (isequal(line(1),'O'))
-        %format string and pull data
-        line = line(13:end);
-        line = textscan(line, '%32f%f%f%f','delimiter', ',');
-        
-        orientation(orientation_index).time = cell2mat(line(1));
-        orientation(orientation_index).azimuth = cell2mat(line(2));
-        orientation(orientation_index).pitch = cell2mat(line(3));
-        orientation(orientation_index).roll = cell2mat(line(4));
-        
-        orientation_index = orientation_index + 1;
-    
-    % Fix location line
-    elseif (isequal(line(1),'F'))
-        %format string and pull data
-        line = line(5:end);
-        line = textscan(line, '%32f%s%f','delimiter', ',');
-        
-        fix(fix_index).time = cell2mat(line(1));
-        fix(fix_index).constellation = string(line(2));
-        fix(fix_index).svid = cell2mat(line(3));
-        
-        fix_index = fix_index + 1;
-        
     % Raw measurements line
     elseif (isequal(line(1),'R'))
         %format string and pull data
@@ -86,8 +86,8 @@ while (~(feof(fid)))
         measurements(measurements_index).carrierFreq = cell2mat(line(5));
         
         measurements_index = measurements_index + 1;
+        
     end
-    
 
 end
 

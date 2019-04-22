@@ -1,6 +1,6 @@
 function runCN0(gnssFile)
-fileFolder = strsplit(gnssFile, '/');
-fileFolder = fileFolder{end-1};
+fileFolder = strsplit(gnssFile, '\');
+fileFolder = strjoin({fileFolder{1:end-1}},"/");
 gnss_data = reader(gnssFile);
 sessionName = strcat("gnss");
 plotCN0(gnss_data.measurements, gnss_data.initial_time, sessionName,fileFolder);

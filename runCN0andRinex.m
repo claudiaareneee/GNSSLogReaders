@@ -1,6 +1,6 @@
 function runCN0andRinex(gnssFile, rinexFile)
-fileFolder = strsplit(gnssFile, '/');
-fileFolder = fileFolder{end-1};
+fileFolder = strsplit(gnssFile, '\');
+fileFolder = strjoin({fileFolder{1:end-1}},"/");
 
 gnss_data = reader(gnssFile);
 gnss_initial_time = gnss_data.initial_time;

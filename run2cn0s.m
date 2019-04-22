@@ -1,19 +1,19 @@
 function run2cn0s(AFile, BFile)
 
-fileFolder = strsplit(AFile, '/');
-fileFolder = fileFolder{end-1};
+fileFolder = strsplit(gnssFile, '\');
+fileFolder = strjoin({fileFolder{1:end-1}},"/");
 
 a_data = reader(AFile);
 gnss_initial_time = a_data.initial_time;
 
 b_data = reader(BFile);
 sessionName = strcat("session");
-plotCN0andRinex(gnss_initial_time,a_data.measurements,b_data.measurements,sessionName,fileFolder);
+plot2cn0s(gnss_initial_time,a_data.measurements,b_data.measurements,sessionName,fileFolder);
 
 disp("end of plotting function");
 end
 
-function plotCN0andRinex(gnss_initial_time,A,B,sessionName,fileFolder)
+function plot2cn0s(gnss_initial_time,A,B,sessionName,fileFolder)
 AmapKeys = cell2mat(keys(A));
 
 for i = 1:length(keys(A))
