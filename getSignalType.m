@@ -7,7 +7,7 @@ if(frequency == 1575)
     signaltype = "L1";
 elseif (frequency == 1176)
     signaltype = "L5";
-elseif (frequency == 1000) % This is a placeholder value
+elseif (frequency == 1000) % This is a placeholder value for signals without carrier frequencies
     signaltype = "";
 else
     signaltype = num2str(frequency);
