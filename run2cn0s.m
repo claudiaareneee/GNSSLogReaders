@@ -1,4 +1,8 @@
-function run2cn0s(fileFolder, AFile, BFile)
+function run2cn0s(AFile, BFile)
+
+fileFolder = strsplit(AFile, '/');
+fileFolder = fileFolder{end-1};
+
 a_data = reader(AFile);
 gnss_initial_time = a_data.initial_time;
 

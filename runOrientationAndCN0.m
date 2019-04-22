@@ -1,5 +1,5 @@
 function runOrientationAndCN0(fileFolder)
-    logs = dir(strcat(fileFolder,'\Logs\*.txt'));
+    logs = dir(strcat(fileFolder,'\*.txt'));
     for i = 1:length(logs)
         data = reader(strcat(logs(i).folder,'\', logs(i).name));
         sessionName = strcat("session_",num2str(i));
