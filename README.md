@@ -8,7 +8,7 @@ Gnss Log Readers is a short repo with MATLAB files that read log files from the 
 * Use ```runOrientationAndCN0(fileFolder)``` when you want to plot orientation and cn0 vs time
 * Use ```run2cn0s(AFile, BFile)``` when you want to plot the CN0 from two files on the same chart
 
-**Note** Input parameters should be full paths strings to data. 
+**Note:** Input parameters should be strings of the full path to data. 
 ### Examples: 
 Orientation
 ```
