@@ -7,6 +7,8 @@ if(frequency == 1575)
     signaltype = "L1";
 elseif (frequency == 1176)
     signaltype = "L5";
+elseif (frequency == 1000) % This is a placeholder value
+    signaltype = "";
 else
     signaltype = num2str(frequency);
 end

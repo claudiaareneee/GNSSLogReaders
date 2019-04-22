@@ -1,4 +1,4 @@
-function plotDualCN0(gnss,initial_time,sessionName,fileFolder)
+function plotCN0(gnss,initial_time,sessionName,fileFolder)
 gnssMapKeys = cell2mat(keys(gnss));
 
 for i = 1:length(keys(gnss))
@@ -11,7 +11,9 @@ for i = 1:length(keys(gnss))
     
     for j = 1:length(currentKeys)
         signaltype = getSignalType(floor(gnssMapKeys(i)/100.0),currentKeys(j));
-        legend_strings = [legend_strings; signaltype];
+        satellite = num2str(gnssMapKeys(i));
+        satellite = satellite(2:end);
+        legend_strings = [legend_strings; strcat(signaltype, " ", satellite)];
         data = currentMap(currentKeys(j));
         time = data(:, 1);
         time = time - initial_time;

@@ -93,6 +93,21 @@ end
 
 % finished reading file
 fclose(fid);
+if(~isempty(measurements) && ~isempty(status))
+    if(measurements() > status.time)
+        initial_time = status.time;
+    else
+        initial_time = measurements.time;
+    end
+elseif(~isempty(measurements))
+    initial_time = measurements.time;
+elseif(~isempty(status))
+    initial_time = status.time;
+else
+    initial_time = 0;
+end
+
+GNSS_data.initial_time = initial_time;
 
 % Reorganizing satellite recordings by satellite ID's by converting cell
 % array to Map

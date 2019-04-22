@@ -25,6 +25,12 @@ legend_strings = [legend_strings; "Roll"];
 plot(ori_time,ori_pitch, 'm');
 legend_strings = [legend_strings; "Pitch"];
 
+
 postPlot(legend_strings, strcat(sessionName, "_Orientation"));
+% Additional plot configurations
+ylim([-200 200]);
+yticks(-180:30:180)
+ytickformat('degrees');
+
 saveGraphs(fileFolder,strcat(sessionName, "_Orientation"), fig);
 end
