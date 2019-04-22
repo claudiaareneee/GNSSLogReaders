@@ -10,10 +10,10 @@ for i = 1:length(keys(gnss))
     currentKeys = cell2mat(keys(currentMap));
     
     for j = 1:length(currentKeys)
-        signaltype = getSignalType(floor(gnssMapKeys(i)/100.0),currentKeys(j));
-        satellite = num2str(gnssMapKeys(i));
-        satellite = satellite(2:end);
-        legend_strings = [legend_strings; strcat(signaltype, " ", satellite)];
+        signaltype = getInfo(gnssMapKeys(i),currentKeys(j));
+        title = signaltype.id;
+        signaltype = signaltype.signalType;
+        legend_strings = [legend_strings; signaltype];
         data = currentMap(currentKeys(j));
         time = data(:, 1);
         time = time - initial_time;
@@ -22,7 +22,7 @@ for i = 1:length(keys(gnss))
         plot(time, cn0);
     end
     
-    postPlot(legend_strings,num2str(gnssMapKeys(i)));
+    postPlot(legend_strings,title);
     
     file_name = strcat(sessionName,"_",num2str(gnssMapKeys(i)));
     saveGraphs(fileFolder,file_name,fig);

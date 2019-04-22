@@ -22,7 +22,9 @@ for i = 1:length(keys(gnss))
     end
     
     for j = 1:length(currentKeys)
-        signaltype = getSignalType(floor(gnssMapKeys(i)/100.0),currentKeys(j));
+        signaltype = getInfo(gnssMapKeys(i),currentKeys(j));
+        title = signaltype.id;
+        signaltype = signaltype.signalType;
         legend_strings = [legend_strings; strcat("GNSS ", signaltype)];
         data = currentMap(currentKeys(j));
         time = data(:, 1);
@@ -32,8 +34,7 @@ for i = 1:length(keys(gnss))
         plot(time, cn0);
     end
     
-    mytitle = getSignalType(floor(gnssMapKeys(i)/100.0),currentKeys(j));
-    postPlot(legend_strings,mytitle);
+    postPlot(legend_strings,title);
     
     file_name = strcat(sessionName,"_",num2str(gnssMapKeys(i)));
     saveGraphs(fileFolder,file_name,fig);

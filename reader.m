@@ -94,7 +94,7 @@ end
 % finished reading file
 fclose(fid);
 if(~isempty(measurements) && ~isempty(status))
-    if(measurements() > status.time)
+    if(measurements(1).time > status(1).time)
         initial_time = status.time;
     else
         initial_time = measurements.time;
